@@ -8,7 +8,7 @@ Ptarget1 = Ptarget1down + (Ptarget1up - Ptarget1down) * ((MeanAmbTemp - Vdown)/(
 Ptarget2up = table(Ind,4);
 Ptarget2down = table(Ind+1,4);
 PtargetEnd = Ptarget2down + (Ptarget2up - Ptarget2down) * ((MeanAmbTemp - Vdown)/(Vup-Vdown));
-%linear Interpolation for APRR2 (Top-off APRR) %
+%linear Interpolation for APRR2 (Top-off APRR) 
 APRR2up  = table(Ind,5);
 APRR2down = table(Ind+1,5);
 APRR2Min = APRR2down + (APRR2up - APRR2down) * ((MeanAmbTemp - Vdown)/(Vup-Vdown));

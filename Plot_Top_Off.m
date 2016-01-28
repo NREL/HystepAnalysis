@@ -16,7 +16,7 @@ APRR2=APRR2Min/60; %
 
 yEndoldRamp=APRR*(x(2)-x(1))+Pzero;
 
-%%% Plot pressure ramp and pressure tolerences and stuff
+%%% Plot pressure ramp and pressure tolerences 
 for i=1:2:(length(x)-1)
     if i==1
         xline=[x(i) x(i+1)];

@@ -1,7 +1,7 @@
 function varargout = Fill_Ramp_Rate_Standard(varargin)
 % FILL_RAMP_RATE_NEW M-file for Fill_Ramp_Rate_New.fig
 %      FILL_RAMP_RATE_NEW, by itself, creates a new FILL_RAMP_RATE_NEW or raises the existing
-%      singleton*.
+%      singleton*. slgjsdlfkgj
 %
 %      H = FILL_RAMP_RATE_NEW returns the handle to a new FILL_RAMP_RATE_NEW or the handle to
 %      the existing singleton*.

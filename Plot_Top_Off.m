@@ -12,7 +12,7 @@ PtargetEnd = Ptarget2down + (Ptarget2up - Ptarget2down) * ((MeanAmbTemp - Vdown)
 APRR2up  = table(Ind,5);
 APRR2down = table(Ind+1,5);
 APRR2Min = APRR2down + (APRR2up - APRR2down) * ((MeanAmbTemp - Vdown)/(Vup-Vdown));
-APRR2=APRR2Min/60;
+APRR2=APRR2Min/60; % test 
 
 yEndoldRamp=APRR*(x(2)-x(1))+Pzero;
 

@@ -754,24 +754,24 @@ elseif get(handles.radiobuttonT20,'Value')==1;
 end
 delete(LegendFillGraph);
 %delete(Legendtstart);
-disp_data = input(['Have NREL dispenser data? y/n [y]:'],'s');
-if isempty(disp_data)
-    disp_data = 'y';
-end
-if disp_data == 'y'
-    text_file_convert
-    rampstart = starttime+x(1)/(60*60*24);
-    figure;plot((D(1).HosePressureH70Time),D(1).HosePressureH70/145.04,'LineWidth',2);
-    axis([starttime+0.95/24 starttime+1.05/24 0 70]);
-    title('Please Zoom in, Mark Start of Fill and Press Return','Color','r','Fontsize',16);
-    [xx yy] = ginput;
-    close
-    kk = find(D.HoseTemperatureH70Time > xx & D.HoseTemperatureH70Time < (xx + t(end)/(60*60*24)));
-    %    LegendDpressure = plot((D(1).HosePressureH70Time(kk) - D(1).HosePressureH70Time(kk(1)))*60*60*24,D(1).HosePressureH70(kk)/145.04,'LineWidth',2);
-    %    LegendDtemp = plot((D(1).HoseTemperatureH70Time(kk) - D(1).HoseTemperatureH70Time(kk(1)))*60*60*24,D(1).HoseTemperatureH70(kk),'LineWidth',2);
-    plot((D(1).HosePressureH70Time(kk) - D(1).HosePressureH70Time(kk(1)))*60*60*24 + x(1),D(1).HosePressureH70(kk)/145.04,'LineWidth',2);
-    %plot((D(1).HosePressureH70Time-(rampstart+0.041833514347672))*60*60*24+x(1),D(1).HosePressureH70/145.04,'LineWidth',2);
-end
+% disp_data = input(['Have NREL dispenser data? y/n [y]:'],'s');
+% if isempty(disp_data)
+%     disp_data = 'y';
+% end
+% if disp_data == 'y'
+%     text_file_convert
+%     rampstart = starttime+x(1)/(60*60*24);
+%     figure;plot((D(1).HosePressureH70Time),D(1).HosePressureH70/145.04,'LineWidth',2);
+%     axis([starttime+0.95/24 starttime+1.05/24 0 70]);
+%     title('Please Zoom in, Mark Start of Fill and Press Return','Color','r','Fontsize',16);
+%     [xx yy] = ginput;
+%     close
+%     kk = find(D.HoseTemperatureH70Time > xx & D.HoseTemperatureH70Time < (xx + t(end)/(60*60*24)));
+%     %    LegendDpressure = plot((D(1).HosePressureH70Time(kk) - D(1).HosePressureH70Time(kk(1)))*60*60*24,D(1).HosePressureH70(kk)/145.04,'LineWidth',2);
+%     %    LegendDtemp = plot((D(1).HoseTemperatureH70Time(kk) - D(1).HoseTemperatureH70Time(kk(1)))*60*60*24,D(1).HoseTemperatureH70(kk),'LineWidth',2);
+%     plot((D(1).HosePressureH70Time(kk) - D(1).HosePressureH70Time(kk(1)))*60*60*24 + x(1),D(1).HosePressureH70(kk)/145.04,'LineWidth',2);
+%     %plot((D(1).HosePressureH70Time-(rampstart+0.041833514347672))*60*60*24+x(1),D(1).HosePressureH70/145.04,'LineWidth',2);
+% end
 % LegendHpressure = plot(Time(idxStart:idxEnd), P_recep(idxStart:idxEnd),'c','LineWidth',2);
 % LegendT1pressure = plot(Time(idxStart:idxEnd), P_tank1(idxStart:idxEnd),'LineWidth',2);
 % LegendT2pressure = plot(Time(idxStart:idxEnd), P_tank2(idxStart:idxEnd),'LineWidth',2);
@@ -785,6 +785,11 @@ end
  plot(Time, P_tank1,'LineWidth',2);
  plot(Time, P_tank2,'LineWidth',2);
  plot(Time, P_tank3,'LineWidth',2);
+ if nwp == 35
+     SOC_1 = SOC_1*40.2/24;
+     SOC_2 = SOC_2*40.2/24;
+     SOC_3 = SOC_3*40.2/24;
+ end
 if exist('t3','var')
     %     LegendT1SOC = plot(t3, SOC_1(1:length(t3)),'LineWidth',2);
     %     LegendT2SOC = plot(t3, SOC_2(1:length(t3)),'LineWidth',2);
@@ -852,11 +857,12 @@ set(gca,'XTick',x(1)-60:60:x(end)+60)         %set(gca, 'XTick', [debut:step:fin
 set(gca,'XTickLabel',MinIdx)
 xlabel('Time [min]','Fontsize',12);
 ylabel('Pressure [MPa]/ SOC [%]','Fontsize',12);
-if disp_data == 'y'
-    legend('APRR','Upper Limit','Lower Limit','Dispenser Pressure','Receptacle Pressure','Tank 1 Pressure','Tank 2 Pressure','Tank 3 Pressure','Tank 1 SOC','Tank 2 SOC','Tank 3 SOC','Location','EastOutside')
-else
-    legend('APRR','Upper Limit','Lower Limit','Receptacle Pressure','Tank 1 Pressure','Tank 2 Pressure','Tank 3 Pressure','Tank 1 SOC','Tank 2 SOC','Tank 3 SOC','Location','EastOutside')
-end
+legend('APRR','Upper Limit','Lower Limit','Receptacle Pressure','Tank 1 Pressure','Tank 2 Pressure','Tank 3 Pressure','Tank 1 SOC','Tank 2 SOC','Tank 3 SOC','Location','EastOutside')
+% if disp_data == 'y'
+%     legend('APRR','Upper Limit','Lower Limit','Dispenser Pressure','Receptacle Pressure','Tank 1 Pressure','Tank 2 Pressure','Tank 3 Pressure','Tank 1 SOC','Tank 2 SOC','Tank 3 SOC','Location','EastOutside')
+% else
+%     legend('APRR','Upper Limit','Lower Limit','Receptacle Pressure','Tank 1 Pressure','Tank 2 Pressure','Tank 3 Pressure','Tank 1 SOC','Tank 2 SOC','Tank 3 SOC','Location','EastOutside')
+% end
 %axis auto
 IdxSuffix = strfind(filename,'.'); %find filename suffix
 filename(IdxSuffix:end) = [];
@@ -890,9 +896,9 @@ plot(Time, T_tank1_ave,'LineWidth',2);
 plot(Time, T_tank2_ave,'LineWidth',2);
 plot(Time, T_tank3_ave,'LineWidth',2);
 plot(Time, T_amb,'LineWidth',2);
-if disp_data == 'y'
-plot((D(1).HoseTemperatureH70Time(kk) - D(1).HoseTemperatureH70Time(kk(1)))*60*60*24 + x(1),D(1).HoseTemperatureH70(kk),'LineWidth',2);
-end
+% if disp_data == 'y'
+% plot((D(1).HoseTemperatureH70Time(kk) - D(1).HoseTemperatureH70Time(kk(1)))*60*60*24 + x(1),D(1).HoseTemperatureH70(kk),'LineWidth',2);
+% end
 
 % if get(handles.radiobuttonComm, 'Value') == 1
 %     plot(decimate(t2,2),flow_rate,'LineWidth',2)
@@ -915,11 +921,12 @@ set(gca,'XTickLabel',MinIdx)
 xlabel('Time [min]','Fontsize',12);
 ylabel('Temperature [C]/Mass Flow [g/sec]','Fontsize',12);
 grid on
-if disp_data == 'y'
-    legend('Upper Limit','Lower Limit','Receptacle','Tank 1','Tank 2','Tank 3','Ambient','Dispenser','Mass Flow','Location','EastOutside')
-else
-    legend('Upper Limit','Lower Limit','Receptacle','Tank 1','Tank 2','Tank 3','Ambient','Mass Flow','Location','EastOutside')
-end
+legend('Upper Limit','Lower Limit','Receptacle','Tank 1','Tank 2','Tank 3','Ambient','Mass Flow','Location','EastOutside')
+% if disp_data == 'y'
+%     legend('Upper Limit','Lower Limit','Receptacle','Tank 1','Tank 2','Tank 3','Ambient','Dispenser','Mass Flow','Location','EastOutside')
+% else
+%     legend('Upper Limit','Lower Limit','Receptacle','Tank 1','Tank 2','Tank 3','Ambient','Mass Flow','Location','EastOutside')
+% end
 
 saveas(fig2,[pathname sheets{sheetnum} ' Temp'])
 fig2.PaperUnits = 'inches';
